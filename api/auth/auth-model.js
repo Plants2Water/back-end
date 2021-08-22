@@ -1,9 +1,9 @@
-const db = require('../../data/dbConfig');
+const db = require('../data/db-config');
 
 function findById(id) {
 return db("users")
 .where("id", id)
-.select("id", "username", "password").first();
+.select("*").first();
 }
 
 function findBy(filter) {
@@ -12,13 +12,17 @@ function findBy(filter) {
     .select("*");
   }
 
-async function add({ username, password }) { 
-    const [id] = await db('users')
+async function add({ username, password, last_name, first_name, e, email }) { 
+    const user = await db('users')
     .insert({
         username, 
-        password 
-    });
-    return findById(id);
+        password
+    }, [
+        "user_id",
+        "username",
+        "password"
+    ]);
+    return user;
 }
 
 module.exports = {

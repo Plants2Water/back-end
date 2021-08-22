@@ -1,13 +1,30 @@
 exports.up = async (knex) => {
   await knex.schema
-    .createTable('users', (users) => {
-      users.increments('user_id')
-      users.string('username', 200).notNullable()
-      users.string('password', 200).notNullable()
-      users.timestamps(false, true)
+    .createTable('users', (table) => {
+      table.increments('user_id');
+      table.string('username', 200).unique().notNullable();
+      table.string('password', 200).notNullable();
+      table.timestamps(false, true);
     })
-}
+    .createTable('plants', (table) => {
+      table.increments('plant_id');
+      table.string('species', 200);
+      table.string('name', 200).notNullable();
+      table.integer('water_interval').notNullable();
+      table.date('last_watered').notNullable();
+      table.string('notes', 1000).notNullable();
+      table.integer('user_id')
+      .unsigned()
+      .notNullable()
+      .references('user_id')
+      .inTable('users')
+      .onDelete('CASCADE')
+      .onUpdate('RESTRICT');
+      table.timestamps(false, true);
+    });
+};
 
 exports.down = async (knex) => {
-  await knex.schema.dropTableIfExists('users')
-}
+  await knex.schema.dropTableIfExists('plants');
+  await knex.schema.dropTableIfExists('users');
+};
