@@ -12,8 +12,8 @@ function findBy(filter) {
     .select("*");
   }
 
-async function add({ username, password, last_name, first_name, e, email }) { 
-    const user = await db('users')
+async function add({ username, password }) { 
+    const user = await db("users")
     .insert({
         username, 
         password
