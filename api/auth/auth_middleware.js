@@ -39,14 +39,19 @@ async function validateUsername(req, res, next) {
     try {
       const { 
           username, 
-          password
+          password,
+          lastName,
+          firstName
         } = req.body;
       if (
           !username || 
-          !password) {
+          !password ||
+          !lastName ||
+          !firstName
+          ) {
         next({
           status: 401,
-          message: "username, password, last name, first name and email required"
+          message: "username, password, last name, first name required"
         });
       }
         next();

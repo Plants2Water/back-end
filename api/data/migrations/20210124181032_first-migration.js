@@ -4,6 +4,11 @@ exports.up = async (knex) => {
       table.increments('user_id');
       table.string('username', 200).unique().notNullable();
       table.string('password', 200).notNullable();
+      table.string('last_name', 200).notNullable();
+      table.string('first_name', 200).notNullable();
+      table.string('email', 200).unique().notNullable();
+      table.string('telephone', 200).unique().notNullable();
+ 
       table.timestamps(false, true);
     })
     .createTable('plants', (table) => {
@@ -13,6 +18,7 @@ exports.up = async (knex) => {
       table.integer('water_interval').notNullable();
       table.date('last_watered').notNullable();
       table.string('notes', 1000).notNullable();
+      table.string('photo_url', 250);
       table.integer('user_id')
       .unsigned()
       .notNullable()
