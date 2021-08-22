@@ -26,14 +26,18 @@ router.post('/register', validateBody, checkUsernameExists, async (req, res, nex
             username, 
             password,
             lastName,
-            firstName
+            firstName,
+            telephone,
+            email
          } = req.body;
         const hash = bcrypt.hashSync(password, 8);
         const user = { 
             username, 
             password: hash,
             lastName,
-            firstName
+            firstName,
+            telephone,
+            email
         };
         const newUser = await add(user);
         res.status(201).json(newUser);

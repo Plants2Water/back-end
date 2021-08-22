@@ -41,17 +41,21 @@ async function validateUsername(req, res, next) {
           username, 
           password,
           lastName,
-          firstName
+          firstName,
+          telephone,
+          email
         } = req.body;
       if (
           !username || 
           !password ||
           !lastName ||
-          !firstName
+          !firstName ||
+          !telephone ||
+          !email
           ) {
         next({
           status: 401,
-          message: "username, password, last name, first name required"
+          message: "username, password, last name, first name, telephone and email address are all required"
         });
       }
         next();

@@ -16,18 +16,26 @@ async function add({
     username, 
     password,
     lastName,
-    firstName
+    firstName,
+    telephone,
+    email
 }) { 
     const user = await db("users")
     .insert({
         username: username,
         password: password,
         last_name: lastName,
-        first_name: firstName
+        first_name: firstName,
+        telephone: telephone,
+        email: email
     }, [
         "user_id",
         "username",
-        "password"
+        "password",
+        "first_name",
+        "last_name",
+        "telephone",
+        "email"
     ]);
     return user;
 }
