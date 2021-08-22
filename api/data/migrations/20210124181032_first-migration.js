@@ -17,8 +17,8 @@ exports.up = async (knex) => {
       table.string('name', 200).notNullable();
       table.integer('water_interval').notNullable();
       table.date('last_watered').notNullable();
-      table.string('notes', 1000).notNullable();
       table.string('photo_url', 250);
+      table.string('notes', 1000).notNullable();
       table.integer('user_id')
       .unsigned()
       .notNullable()
