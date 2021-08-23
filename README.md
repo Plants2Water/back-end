@@ -40,7 +40,7 @@ https://bw-water-my-plants-01.herokuapp.com/
 [POST] REGISTER (/api/auth/register). 
 ---------------------
 
-*returns* 
+*expects* 
 
    
 
@@ -75,7 +75,7 @@ https://bw-water-my-plants-01.herokuapp.com/
 
 [POST] LOGIN (/api/auth/login). 
 ---------------------
-    
+  *expects*   
     {
     	username,
     	password,
