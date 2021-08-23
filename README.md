@@ -78,7 +78,7 @@ https://bw-water-my-plants-01.herokuapp.com/
   *expects*   
     {
     	username,
-    	password,
+    	password
     }
 
 

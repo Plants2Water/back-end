@@ -10,7 +10,7 @@ function findBy(filter) {
     return db("users")
     .where(filter)
     .select("*");
-  }
+}
 
 async function add({
     username, 
