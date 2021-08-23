@@ -79,7 +79,7 @@ https://bw-water-my-plants-01.herokuapp.com/
     {
     	username,
     	password,
-    {
+    }
 
 
 *returns*      
