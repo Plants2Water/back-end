@@ -15,6 +15,7 @@ server.use(cors());
 
 server.use('/api/auth', authRouter);
 server.use('/users', restrict, plantsRouter); // only logged-in users 
+server.use('/plants', restrict, plantsRouter); // only logged-in users 
 
 server.use((err, req, res, next) => { // eslint-disable-line
   res.status(err.status || 500).json({
