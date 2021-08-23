@@ -37,7 +37,7 @@ async function add({
         "telephone",
         "email"
     ]);
-    return user;
+    return user[0];
 }
 
 module.exports = {
