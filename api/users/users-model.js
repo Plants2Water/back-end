@@ -8,7 +8,12 @@ const updateUserById  = async (id, user) => {
     return findById(id);
 };
 
+const getAllPlantsForUser  = async (id) => {
+    return await db('plants')
+    .where('user_id', id)
+};
+
 module.exports = {
-    // getAllUsers,
+    getAllPlantsForUser,
     updateUserById,
 };

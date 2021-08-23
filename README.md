@@ -134,34 +134,27 @@ https://bw-water-my-plants-01.herokuapp.com/
     "updated_at": "2021-08-23T14:42:11.045Z"
 }
  
-<!-- [GET] plants by userId *restricted* (/api/users/:userId/plants)
+GET] plants by user_id *restricted* (/users/:id/plants)
 ---------------------
 
-*returns*  
+*returns array of plants*  
 
 [
-    
     {
-        user_id,
-        username,
-        plant_id,
-        plant_nickname,
-        plant_species,
-        h2ofrequency,
-        plant_image
-    },
-    {
-        user_id,
-        username,
-        plant_id,
-        plant_nickname,
-        plant_species,
-        h2ofrequency,
-        plant_image
+        "plant_id": 6,
+        "species": "Saintpaulia",
+        "nickname": "African Violet",
+        "h2oFrequency": 2,
+        "last_watered": "2021-08-23T06:00:00.000Z",
+        "photo_url": "https://www.houseplantsexpert.com/image-files/african-violet.jpg",
+        "notes": "The African violet...",
+        "user_id": 3,
+        "created_at": "2021-08-23T14:42:11.049Z",
+        "updated_at": "2021-08-23T14:42:11.049Z"
     }
 ]
 
-[PUT] user *restricted* (/api/users/:userId)
+<!-- [PUT] user *restricted* (/api/users/:userId)
 ---------------------
 
 *receives*  
@@ -287,7 +280,7 @@ https://bw-water-my-plants-01.herokuapp.com/
         created_at,               
         updated_at
     
-}
+} -->
 -->-->   
 Login_credential: these credentials can be used to test the login and end points, if you did not register yet                                                      
 username: 
