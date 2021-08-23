@@ -1,60 +1,269 @@
-# Build Week Scaffolding for Node and PostgreSQL
+#  Build Week - unit 4 - Water My Plants
 
-## Video Tutorial
+## Base URL
+https://bw-water-my-plants-01.herokuapp.com/
 
-The following tutorial explains how to set up this project using PostgreSQL and Heroku.
 
-[![Setting up PostgreSQL for Build Week](https://img.youtube.com/vi/kTO_tf4L23I/maxresdefault.jpg)](https://www.youtube.com/watch?v=kTO_tf4L23I)
 
-## Requirements
+## API endpoints
 
-- [PostgreSQL, pgAdmin 4](https://www.postgresql.org/download/) and [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) installed in your local machine.
-- A Heroku app with the [Heroku PostgreSQL Addon](https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-heroku-postgres) added to it.
-- Development and testing databases created with [pgAdmin 4](https://www.pgadmin.org/docs/pgadmin4/4.29/database_dialog.html).
+### login/register
 
-## Starting a New Project
+| Auth | Endpoint           | Required                  | Restrictions | Notes                                             |
+| -----| ------------------ | --------------------------| -------------| ------------------------------------------------- |
+| POST | /api/auth/register | username, lastName, firstName, password, telephone, email | Username: unique,min 3 & max 25 chars, password:min 8 & max 25 chars & phone: unique string| Creates a new user with auto Id.|
+| POST | /api/auth/login    | username, password        | None         | Returns a welcome message and the JSON Web Token. |
 
-- Create a new repository using this template, and clone it to your local.
-- Create a `.env` file and follow the instructions inside `knexfile.js`.
-- Fix the scripts inside `package.json` to use your Heroku app.
 
-## Scripts
+<!--### Users
 
-- **start**: Runs the app in production.
-- **server**: Runs the app in development.
-- **migrate**: Migrates the local development database to the latest.
-- **rollback**: Rolls back migrations in the local development database.
-- **seed**: Truncates all tables in the local development database, feel free to add more seed files.
-- **test**: Runs tests.
-- **deploy**: Deploys the main branch to Heroku.
+| Auth | Endpoint              | Required            | Restrictions      -| Notes                                    |
+| -----| --------------------- | --------------------| -------------------|------------------------------------------|
+| GET  | /api/users/:user_id        | None           | authenticated user | Returns the specified user object.       |
+| GET  | /api/users/:user_id/plants | None           | authenticated user | Returns array of users plants.           |
+| PUT  | /api/users/:user_id        | username, lastName, firstName, telephone, email |authenticated user| Returns updated user object.  |
 
-**The following scripts NEED TO BE EDITED before using: replace `YOUR_HEROKU_APP_NAME`**
 
-- **migrateh**: Migrates the Heroku database to the latest.
-- **rollbackh**: Rolls back migrations in the Heroku database.
-- **databaseh**: Interact with the Heroku database from the command line using psql.
-- **seedh**: Runs all seeds in the Heroku database.
+### Plants
 
-## Hot Tips
+| Auth   | Endpoint        | Required            | Restrictions          | Notes                                       |
+| -------| --------------- | --------------------| ----------------------| ------------------------------------------- |
+| GET    | /api/plants/    | None                | authenticated user    |  Returns specified plant object.            |
+| GET    | /api/plants/:plant_id | None          | authenticated user    |  Returns array of All plants.               |
+| POST   | /api/plants/    | plant_nickname, plant_species, h2ofrequency, user_id | authenticated user        | Returns new plant object. |
+| PUT    | /api/plants/:plant_id | user_id, plant_nickname, plant_species, h2ofrequency | authenticated user        | Returns updated plant object.  |
+| DELETE | /api/plants/:plant_id | plant_id      | authenticated user | Returns deleted record if successfully deleted. |
 
-- Figure out the connection to the database and deployment before writing any code.
+-->
+### Detailed_endpoints
 
-- If you need to make changes to a migration file that has already been released to Heroku, follow this sequence:
+[POST] REGISTER (/api/auth/register). 
+---------------------
 
-  1. Roll back migrations in the Heroku database
-  2. Deploy the latest code to Heroku
-  3. Migrate the Heroku database to the latest
+*returns* 
 
-- If your frontend devs are clear on the shape of the data they need, you can quickly build provisional endpoints that return mock data. They shouldn't have to wait for you to build the entire backend.
+   
 
-- Keep your endpoints super lean: the bulk of the code belongs inside models and other middlewares.
+    
+    
+    
+    {
+    	username,
+    	password,
+      	lastName,
+      	firstName,
+      	telephone,
+      	email
+    }
 
-- Validating and sanitizing client data using a library is much less work than doing it manually.
+*returns* 
 
-- Revealing crash messages to clients is a security risk, but during development it's helpful if your frontend devs are able to tell you what crashed.
+   
 
-- PostgreSQL comes with [fantastic built-in functions](https://hashrocket.com/blog/posts/faster-json-generation-with-postgresql) for hammering rows into whatever JSON shape.
+    
+    
+    
+    {
+    	"email": "test@test.com",
+    	"first_name": "Ralph",
+    	"last_name": "Kramden",
+    	"password": "$2a$08$ygzd0thWCBPXGKHwNAPHxOKqvgm4L6OBubG/3BuRuUeQjdlHN./Im",
+    	"telephone": "215.898.9876",
+    	"user_id": 11,
+    	"username": "plantlover"
+    }
 
-- If you want to edit a migration that has already been released but don't want to lose all the data, make a new migration instead. This is a more realistic flow for production apps: prod databases are never migrated down. We can migrate Heroku down freely only because there's no valuable data from customers in it. In this sense, Heroku is acting more like a staging environment than production.
+[POST] LOGIN (/api/auth/login). 
+---------------------
+    
+    {
+    	username,
+    	password,
+    {
 
-- If your fronted devs are interested in running the API locally, help them set up PostgreSQL & pgAdmin in their machines, and teach them how to run migrations in their local. This empowers them to (1) help you troubleshoot bugs, (2) obtain the latest code by simply doing `git pull` and (3) work with their own data, without it being wiped every time you roll back the Heroku db. Collaboration is more fun and direct, and you don't need to deploy as often.
+
+*returns*      
+
+    {
+    "message": "welcome, plantlover",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxMSwidXNlcm5hbWUiOiJtdXJyYXkzIiwiaWF0IjoxNjI5NzI3NzMyLCJleHAiOjE2Mjk4MTQxMzJ9.thk6t2OtKZr0pvmOxmZ0J45eWAsg19Q_xyyOFdD_fA0"
+    }
+
+
+<!-- <!--[GET] user by ID *restricted* (api/users/:userId)   
+---------------------
+
+*returns*    
+
+{  
+
+    user_id,
+    username,
+    password,
+    user_email,
+    user_phone,
+    created_at  
+ }
+ 
+<!-- [GET] plants by userId *restricted* (/api/users/:userId/plants)
+---------------------
+
+*returns*  
+
+[
+    
+    {
+        user_id,
+        username,
+        plant_id,
+        plant_nickname,
+        plant_species,
+        h2ofrequency,
+        plant_image
+    },
+    {
+        user_id,
+        username,
+        plant_id,
+        plant_nickname,
+        plant_species,
+        h2ofrequency,
+        plant_image
+    }
+]
+
+[PUT] user *restricted* (/api/users/:userId)
+---------------------
+
+*receives*  
+
+{  
+
+    username,          
+    user_phone,                                                                    
+    user_email,                                    
+}
+
+*returns*    
+{  
+
+    user_id,
+    username,                                 
+    user_phone,                                 
+    user_email,                                      
+    created_at                                  
+}
+[GET] plants (/api/plants/)
+
+*returns*
+[
+
+    {
+        plant_id,
+        plant_nickname,
+        plant_species,
+        h2ofrequency,
+        plant_image,
+        user_id,
+        created_at,
+        updated_at
+    },
+    {
+        plant_id,
+        plant_nickname,
+        plant_species,
+        h2ofrequency,
+        plant_image,
+        user_id,
+        created_at,
+        updated_at
+    },
+ ]
+ 
+ [GET] plant by ID restricted (api/plants/:plantId)
+ 
+ *returns*
+ 
+ {
+ 
+    user_id,
+    plant_nickname,
+    plant_species,
+    h2ofrequency,
+    plant_image
+}
+
+[POST] plants (/api/plants/)
+
+*receives*
+
+{
+
+    user_id,
+    plant_nickname,
+    plant_species,
+    h2ofrequency,
+    plant_image
+}
+
+*returns*
+
+{
+
+    user_id,
+    plant_id,
+    plant_nickname,
+    plant_species,
+    h2ofrequency,
+    plant_image
+}
+
+[PUT] plant restricted (/api/plants/:plantId)
+
+*receives*
+
+{
+
+    user_id,
+    plant_nickname,
+    plant_species,
+    h2ofrequency,
+    plant_image
+}
+
+*returns*
+
+{
+
+    user_id,
+    plant_nickname,
+    plant_species,
+    h2ofrequency,
+    plant_image
+}
+
+
+[DELETE] plant restricted (/api/plants/:plantId)
+
+*returns*                                       
+
+{      
+
+        plant_id,                            
+        plant_nickname,                        
+        plant_species,                
+        h2ofrequency,                         
+        plant_image,                         
+        user_id,                              
+        created_at,               
+        updated_at
+    
+} -->
+-->-->   
+Login_credential: these credentials can be used to test the login and end points, if you did not register yet                                                      
+username: 
+		doej
+		brownthumb
+		janesmith
+		plantlover                                                                                                                                   
+password: 1234
