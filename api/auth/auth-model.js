@@ -15,8 +15,8 @@ function findBy(filter) {
 async function add({
     username, 
     password,
-    lastName,
-    firstName,
+    last_name,
+    first_name,
     telephone,
     email
 }) { 
@@ -24,8 +24,8 @@ async function add({
     .insert({
         username: username,
         password: password,
-        last_name: lastName,
-        first_name: firstName,
+        last_name: last_name,
+        first_name: first_name,
         telephone: telephone,
         email: email
     }, [

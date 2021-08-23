@@ -25,8 +25,8 @@ router.post('/register', validateBody, checkUsernameExists, async (req, res, nex
         const {
             username, 
             password,
-            lastName,
-            firstName,
+            last_name,
+            first_name,
             telephone,
             email
          } = req.body;
@@ -34,8 +34,8 @@ router.post('/register', validateBody, checkUsernameExists, async (req, res, nex
         const user = { 
             username, 
             password: hash,
-            lastName,
-            firstName,
+            last_name,
+            first_name,
             telephone,
             email
         };

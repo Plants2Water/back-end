@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const authRouter = require('./auth/auth-router.js');
 const plantsRouter = require('./plants/plants-router.js');
+const usersRouter = require('./users/users-router');
 const restrict = require('./auth/restricted.js');
 
 
@@ -14,7 +15,7 @@ server.use(helmet());
 server.use(cors());
 
 server.use('/api/auth', authRouter);
-server.use('/users', restrict, plantsRouter); // only logged-in users 
+server.use('/users', restrict, usersRouter); // only logged-in users 
 server.use('/plants', restrict, plantsRouter); // only logged-in users 
 
 server.use((err, req, res, next) => { // eslint-disable-line

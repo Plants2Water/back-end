@@ -1,4 +1,4 @@
-const { findBy } = require('./auth-model');
+const { findBy } = require('../auth/auth-model');
 
 async function validateUsername(req, res, next) {
     try {
@@ -40,16 +40,16 @@ async function validateUsername(req, res, next) {
       const { 
           username, 
           password,
-          lastName,
-          firstName,
+          last_name,
+          first_name,
           telephone,
           email
         } = req.body;
       if (
           !username || 
           !password ||
-          !lastName ||
-          !firstName ||
+          !last_name ||
+          !first_name ||
           !telephone ||
           !email
           ) {

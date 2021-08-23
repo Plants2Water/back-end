@@ -11,17 +11,17 @@ https://bw-water-my-plants-01.herokuapp.com/
 
 | Auth | Endpoint           | Required                  | Restrictions | Notes                                             |
 | -----| ------------------ | --------------------------| -------------| ------------------------------------------------- |
-| POST | /api/auth/register | username, lastName, firstName, password, telephone, email | Username: unique,min 3 & max 25 chars, password:min 8 & max 25 chars & phone: unique string| Creates a new user with auto Id.|
+| POST | /api/auth/register | username, last_name, first_name, password, telephone, email | Username: unique,min 3 & max 25 chars, password:min 8 & max 25 chars & phone: unique string| Creates a new user with auto Id.|
 | POST | /api/auth/login    | username, password        | None         | Returns a welcome message and the JSON Web Token. |
 
 
-<!--### Users
+<### Users
 
 | Auth | Endpoint              | Required            | Restrictions      -| Notes                                    |
 | -----| --------------------- | --------------------| -------------------|------------------------------------------|
 | GET  | /api/users/:user_id        | None           | authenticated user | Returns the specified user object.       |
 | GET  | /api/users/:user_id/plants | None           | authenticated user | Returns array of users plants.           |
-| PUT  | /api/users/:user_id        | username, lastName, firstName, telephone, email |authenticated user| Returns updated user object.  |
+| PUT  | /api/users/:user_id        | username, last_name, first_name, telephone, email |authenticated user| Returns updated user object.  |
 
 
 ### Plants
@@ -39,47 +39,37 @@ https://bw-water-my-plants-01.herokuapp.com/
 
 [POST] REGISTER (/api/auth/register). 
 ---------------------
+* expects *
 
-*expects* 
+{   
+    "username": "doej2", 
+    "password": "1234",
+    "last_name": "Doe",
+    "first_name": "John",
+    "telephone": "(208)-382-6393",
+    "email": "jondoe@name.com"
+}
 
-   
+*returns* 
 
-    
-    
+{
+    "user_id": 5,
+    "username": "doej2",
+    "password": "$2a$08$XZa0seByf.Q6.oLjvb.qeu1hIn1qhnGIAAs2cSE6ww4Q2Vre/LQQ.",
+    "first_name": "John",
+    "last_name": "Doe",
+    "telephone": "(208)-382-6393",
+    "email": "jondoe@name.com"
+}
+
+
+[POST] LOGIN (/api/auth/login). 
+---------------------
     
     {
     	username,
     	password,
-      	lastName,
-      	firstName,
-      	telephone,
-      	email
-    }
-
-*returns* 
-
-   
-
-    
-    
-    
     {
-    	"email": "test@test.com",
-    	"first_name": "Ralph",
-    	"last_name": "Kramden",
-    	"password": "$2a$08$ygzd0thWCBPXGKHwNAPHxOKqvgm4L6OBubG/3BuRuUeQjdlHN./Im",
-    	"telephone": "215.898.9876",
-    	"user_id": 11,
-    	"username": "plantlover"
-    }
-
-[POST] LOGIN (/api/auth/login). 
----------------------
-  *expects*   
-    {
-    	username,
-    	password
-    }
 
 
 *returns*      
@@ -90,20 +80,23 @@ https://bw-water-my-plants-01.herokuapp.com/
     }
 
 
-<!-- <!--[GET] user by ID *restricted* (api/users/:userId)   
+[GET] user by ID *restricted* (api/users/:userId)   
 ---------------------
+*expects*
+/users/:id
 
 *returns*    
-
-{  
-
-    user_id,
-    username,
-    password,
-    user_email,
-    user_phone,
-    created_at  
- }
+{
+    "user_id": 2,
+    "username": "brownthumb",
+    "password": "$2a$08$tjE6ebEFy7n7zUjsjD2IO.jilGy.RsS8dQEdJgk70XeDrKpnSVVtK",
+    "last_name": "Jones",
+    "first_name": "Pesticide",
+    "telephone": "(208)-382-6786",
+    "email": "brownie@kill.com",
+    "created_at": "2021-08-23T14:42:11.045Z",
+    "updated_at": "2021-08-23T14:42:11.045Z"
+}
  
 <!-- [GET] plants by userId *restricted* (/api/users/:userId/plants)
 ---------------------
@@ -258,7 +251,7 @@ https://bw-water-my-plants-01.herokuapp.com/
         created_at,               
         updated_at
     
-} -->
+}
 -->-->   
 Login_credential: these credentials can be used to test the login and end points, if you did not register yet                                                      
 username: 
