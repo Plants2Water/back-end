@@ -14,8 +14,8 @@ exports.up = async (knex) => {
     .createTable('plants', (table) => {
       table.increments('plant_id');
       table.string('species', 200);
-      table.string('name', 200).notNullable();
-      table.integer('water_interval').notNullable();
+      table.string('nickname', 200).notNullable();
+      table.integer('h2oFrequency').notNullable();
       table.date('last_watered').notNullable();
       table.string('photo_url', 250);
       table.string('notes', 1000).notNullable();
