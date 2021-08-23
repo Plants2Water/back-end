@@ -97,6 +97,42 @@ https://bw-water-my-plants-01.herokuapp.com/
     "created_at": "2021-08-23T14:42:11.045Z",
     "updated_at": "2021-08-23T14:42:11.045Z"
 }
+
+[PUT] user by ID *restricted* (api/users/:id)   
+---------------------
+*expects body with any subset of the following properties*
+
+{
+    "last_name": "Jones",
+    "first_name": "Eddie",
+    "telephone": "(208)-555-6556",
+    "email": "brownie@kill.com"
+}
+*returns* 
+{
+    "user_id": 2,
+    "username": "brownthumb",
+    "password": "$2a$08$tjE6ebEFy7n7zUjsjD2IO.jilGy.RsS8dQEdJgk70XeDrKpnSVVtK",
+    "last_name": "Jones",
+    "first_name": "Eddie",
+    "telephone": "(208)-555-6556",
+    "email": "brownie@kill.com",
+    "created_at": "2021-08-23T14:42:11.045Z",
+    "updated_at": "2021-08-23T14:42:11.045Z"
+}
+
+*returns*    
+{
+    "user_id": 2,
+    "username": "brownthumb",
+    "password": "$2a$08$tjE6ebEFy7n7zUjsjD2IO.jilGy.RsS8dQEdJgk70XeDrKpnSVVtK",
+    "last_name": "Jones",
+    "first_name": "Pesticide",
+    "telephone": "(208)-382-6786",
+    "email": "brownie@kill.com",
+    "created_at": "2021-08-23T14:42:11.045Z",
+    "updated_at": "2021-08-23T14:42:11.045Z"
+}
  
 <!-- [GET] plants by userId *restricted* (/api/users/:userId/plants)
 ---------------------
