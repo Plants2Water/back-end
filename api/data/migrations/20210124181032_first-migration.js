@@ -15,10 +15,10 @@ exports.up = async (knex) => {
       table.increments('plant_id');
       table.string('species', 200);
       table.string('nickname', 200).notNullable();
-      table.integer('h2oFrequency').notNullable();
-      table.date('last_watered').notNullable();
+      table.integer('h2oFrequency');
+      table.date('last_watered');
       table.string('photo_url', 250);
-      table.string('notes', 1000).notNullable();
+      table.string('notes', 1000);
       table.integer('user_id')
       .unsigned()
       .notNullable()
