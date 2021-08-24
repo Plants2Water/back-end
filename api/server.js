@@ -7,8 +7,6 @@ const plantsRouter = require('./plants/plants-router.js');
 const usersRouter = require('./users/users-router');
 const restrict = require('./auth/restricted.js');
 
-
-
 const server = express();
 server.use(express.json());
 server.use(helmet());

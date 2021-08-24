@@ -4,7 +4,7 @@ const {
     getAllPlantsForUser,
     getAllUsers,
 } = require('./users-model');
-const { checkIdExists } = require('./users-middleware');
+const { checkUserIdExists } = require('./users-middleware');
 // const { checkUsernameExists } = require('../auth/auth_middleware'); //think about this in "put" - don't want to take existing username
 
 router.get(
@@ -14,8 +14,8 @@ router.get(
 });
 
 router.get(
-    '/:id', 
-    checkIdExists, 
+    '/:user_id', 
+    checkUserIdExists, 
     (req, res, next) => {
     try {
         res.status(200).json(req.user);
@@ -25,8 +25,8 @@ router.get(
 });
 
 router.put(
-    '/:id', 
-    checkIdExists,
+    '/:user_id', 
+    checkUserIdExists,
     async (req, res, next) => {
         try {
             const updated = await updateUserById(req.params.id, req.body);
@@ -37,8 +37,8 @@ router.put(
 });
 
 router.get(
-    '/:id/plants', 
-    checkIdExists,
+    '/:user_id/plants', 
+    checkUserIdExists,
     async (req, res, next) => {
         try {
             const allPlants =  await getAllPlantsForUser(req.params.id);

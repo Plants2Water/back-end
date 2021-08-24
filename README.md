@@ -205,32 +205,36 @@ NOTE: only nickname and user_id are required.
     "user_id": 3
 }
 
-<!-- [PUT] plant restricted (/api/plants/:plantId)
+ [PUT] plant restricted (/plants)
 
 *receives*
 
 {
-
-    user_id,
-    plant_nickname,
-    plant_species,
-    h2ofrequency,
-    plant_image
+    "plant_id": 11,
+    "species": "updated species of NewPlant",
+    "nickname": "My New updated Plant",
+    "h2oFrequency": 4,
+    "last_watered": "2021-08-25",
+    "photo_url": "https://www.houseplantsexpert.com/image-files/tillandsia-caputmedusae.jpg",
+    "notes": "Happy about my new updated plant",
+    "user_id": 3
 }
 
 *returns*
 
 {
-
-    user_id,
-    plant_nickname,
-    plant_species,
-    h2ofrequency,
-    plant_image
+    "plant_id": 11,
+    "species": "updated species of NewPlant",
+    "nickname": "My New updated Plant",
+    "h2oFrequency": 4,
+    "last_watered": "2021-08-25T06:00:00.000Z",
+    "photo_url": "https://www.houseplantsexpert.com/image-files/tillandsia-caputmedusae.jpg",
+    "notes": "Happy about my new updated plant",
+    "user_id": 3
 }
 
 
-[DELETE] plant restricted (/api/plants/:plantId)
+<!-- [DELETE] plant restricted (/plants)
 
 *returns*                                       
 
@@ -245,7 +249,7 @@ NOTE: only nickname and user_id are required.
         created_at,               
         updated_at
     
-} -->  
+}  -->
 Login_credential: these credentials can be used to test the login and end points, if you did not register yet                                                      
 username: 
 		doej
