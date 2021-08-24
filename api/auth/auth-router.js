@@ -3,8 +3,10 @@ const bcrypt = require('bcryptjs');
 const { add } = require('./auth-model');
 const { 
     checkUsernameExists, 
-    validateBody, 
-    validateUsername
+    validateUserBody, 
+    validateUsername,
+    validateTelephone,
+    validateEmail
 } = require('../auth/auth_middleware');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require("../secrets/index.js");
@@ -20,7 +22,14 @@ function buildToken(user) {
   return jwt.sign(payload, JWT_SECRET, options);
 }
 
-router.post('/register', validateBody, checkUsernameExists, async (req, res, next) => {
+router
+.post(
+  '/register',
+  validateUserBody, 
+  validateUsername,
+  validateEmail,
+  validateTelephone,
+  async (req, res, next) => {
       try {
         const {
             username, 
@@ -46,7 +55,13 @@ router.post('/register', validateBody, checkUsernameExists, async (req, res, nex
       }
 });
 
-router.post('/login', validateUsername, (req, res, next) => {
+router.post(
+  '/login', 
+  checkUsernameExists, 
+  validateUserBody,
+  validateEmail,
+  validateTelephone,
+  (req, res, next) => {
     try {
         const { password } = req.user;
         if (bcrypt.compareSync(req.body.password, password)) {

@@ -5,7 +5,12 @@ const {
     getAllUsers,
 } = require('./users-model');
 const { checkUserIdExists } = require('./users-middleware');
-// const { checkUsernameExists } = require('../auth/auth_middleware'); //think about this in "put" - don't want to take existing username
+const {
+    validateUserBody, 
+    validateTelephone,
+    validateEmail,
+    validateUsername,
+} = require('../auth/auth_middleware'); //think about this in "put" - don't want to accept existing username, telephone or email
 
 router.get(
     '/',
@@ -26,7 +31,11 @@ router.get(
 
 router.put(
     '/:user_id', 
-    checkUserIdExists,
+    checkUserIdExists, 
+    validateUserBody,
+    validateUsername,
+    validateTelephone,
+    validateEmail,
     async (req, res, next) => {
         try {
             const updated = await updateUserById(req.params.user_id, req.body);
