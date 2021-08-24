@@ -83,7 +83,7 @@ https://bw-water-my-plants-01.herokuapp.com/
 [GET] user by ID *restricted* (api/users/:userId)   
 ---------------------
 *expects*
-/users/:id
+/users/:user_id
 
 *returns*    
 {
@@ -98,7 +98,7 @@ https://bw-water-my-plants-01.herokuapp.com/
     "updated_at": "2021-08-23T14:42:11.045Z"
 }
 
-[PUT] user by ID *restricted* (api/users/:id)   
+[PUT] user by ID *restricted* (api/users/:user_id)   
 ---------------------
 *expects body with any subset of the following properties*
 
@@ -134,7 +134,7 @@ https://bw-water-my-plants-01.herokuapp.com/
     "updated_at": "2021-08-23T14:42:11.045Z"
 }
  
-[GET] plants by user_id *restricted* (/users/:id/plants)
+[GET] plants by user_id *restricted* (/users/:user_id/plants)
 ---------------------
 
 *returns array of plants*  
@@ -154,7 +154,7 @@ https://bw-water-my-plants-01.herokuapp.com/
     }
 ]
 
-[PUT] user *restricted* (/users/:userId)
+[PUT] user *restricted* (/users/:user_id)
 ---------------------
 
 *receives*  
@@ -177,7 +177,7 @@ https://bw-water-my-plants-01.herokuapp.com/
 }
 [
  
-[POST] plants (/plants)
+[POST] plant *restricted* (/plants)
 
 *receives*
 
@@ -205,7 +205,7 @@ NOTE: only nickname and user_id are required.
     "user_id": 3
 }
 
- [PUT] plant restricted (/plants)
+ [PUT] plant *restricted* (/plants)
 
 *receives*
 
@@ -234,12 +234,11 @@ NOTE: only nickname and user_id are required.
 }
 
 
-<!-- [DELETE] plant restricted (/plants)
+<!-- [DELETE] plant *restricted* (/plants)
 
 *returns*                                       
 
 {      
-
         plant_id,                            
         plant_nickname,                        
         plant_species,                
@@ -248,7 +247,6 @@ NOTE: only nickname and user_id are required.
         user_id,                              
         created_at,               
         updated_at
-    
 }  -->
 Login_credential: these credentials can be used to test the login and end points, if you did not register yet                                                      
 username: 
