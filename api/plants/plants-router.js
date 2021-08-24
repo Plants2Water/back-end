@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { validatePlantBody, checkPlantIdExists } = require('./plants-middleware');
 const { checkUserIdExists } = require('../users/users-middleware');
 // const { getAllUsers } = require('../auth/auth-model');
-const { createPlant, updatePlantById } = require('./plants-model');
+const { createPlant, updatePlantById, deleteByPlantId } = require('./plants-model');
 
 
 router.post('/', validatePlantBody, checkUserIdExists, async (req, res, next) => {
@@ -18,6 +18,16 @@ router.put('/', validatePlantBody, checkUserIdExists, checkPlantIdExists, async 
     try {
         const updatedPlant = await updatePlantById(req.body);
         return res.status(201).json(updatedPlant);
+    } catch (error) {
+        next(error);
+    }    
+});
+
+router.delete('/', checkPlantIdExists, async (req, res, next) => {
+    const { plant_id } = req.body;
+    try {
+        await deleteByPlantId(plant_id);
+        return res.status(201).json(req.plant);
     } catch (error) {
         next(error);
     }    

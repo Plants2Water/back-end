@@ -233,21 +233,27 @@ NOTE: only nickname and user_id are required.
     "user_id": 3
 }
 
-
-<!-- [DELETE] plant *restricted* (/plants)
+[DELETE] plant *restricted* (/plants)
+*expects*
+{
+    plant_id: 10
+}
 
 *returns*                                       
 
-{      
-        plant_id,                            
-        plant_nickname,                        
-        plant_species,                
-        h2ofrequency,                         
-        plant_image,                         
-        user_id,                              
-        created_at,               
-        updated_at
-}  -->
+{
+    "plant_id": 10,
+    "species": "Tillandsia Caput Medusae",
+    "nickname": "Medusa's Head ",
+    "h2oFrequency": 7,
+    "last_watered": "2021-08-19T06:00:00.000Z",
+    "photo_url": "https://www.houseplantsexpert.com/image-files/tillandsia-caputmedusae.jpg",
+    "notes": "This species is a flowering air plant from the bromeliads family and is one of the most popular of the Tillandsia genus.",
+    "user_id": 1,
+    "created_at": "2021-08-24T14:35:25.283Z",
+    "updated_at": "2021-08-24T14:35:25.283Z"
+}
+
 Login_credential: these credentials can be used to test the login and end points, if you did not register yet                                                      
 username: 
 		doej

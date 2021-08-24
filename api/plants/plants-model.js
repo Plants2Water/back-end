@@ -37,7 +37,13 @@ const updatePlantById  = async (plant) => {
     return updatedPlant;
 };
 
+const deleteByPlantId = async plant_id => {
+    return await db('plants').where('plant_id', plant_id).del()
+};
+  
+
 module.exports = {
+    deleteByPlantId,
     findPlantBy,
     createPlant,
     updatePlantById,
