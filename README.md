@@ -134,7 +134,7 @@ https://bw-water-my-plants-01.herokuapp.com/
     "updated_at": "2021-08-23T14:42:11.045Z"
 }
  
-GET] plants by user_id *restricted* (/users/:id/plants)
+[GET] plants by user_id *restricted* (/users/:id/plants)
 ---------------------
 
 *returns array of plants*  
@@ -154,7 +154,7 @@ GET] plants by user_id *restricted* (/users/:id/plants)
     }
 ]
 
-<!-- [PUT] user *restricted* (/api/users/:userId)
+[PUT] user *restricted* (/users/:userId)
 ---------------------
 
 *receives*  
@@ -175,72 +175,37 @@ GET] plants by user_id *restricted* (/users/:id/plants)
     user_email,                                      
     created_at                                  
 }
-[GET] plants (/api/plants/)
-
-*returns*
 [
-
-    {
-        plant_id,
-        plant_nickname,
-        plant_species,
-        h2ofrequency,
-        plant_image,
-        user_id,
-        created_at,
-        updated_at
-    },
-    {
-        plant_id,
-        plant_nickname,
-        plant_species,
-        h2ofrequency,
-        plant_image,
-        user_id,
-        created_at,
-        updated_at
-    },
- ]
  
- [GET] plant by ID restricted (api/plants/:plantId)
- 
- *returns*
- 
- {
- 
-    user_id,
-    plant_nickname,
-    plant_species,
-    h2ofrequency,
-    plant_image
-}
-
-[POST] plants (/api/plants/)
+[POST] plants (/plants)
 
 *receives*
 
 {
-
-    user_id,
-    plant_nickname,
-    plant_species,
-    h2ofrequency,
-    plant_image
+    "species": "species of NewPlant",
+    "nickname": "My New Plant"
+    "h2oFrequency": 3,
+    "last_watered": "2021-08-19",
+    "photo_url": "https://www.houseplantsexpert.com/image-files/tillandsia-caputmedusae.jpg",
+    "notes": "Happy about my new plant",
+    "user_id": 3
 }
+NOTE: only nickname and user_id are required.
 
 *returns*
 
 {
-
-    user_id,
-    plant_id,
-    plant_nickname,
-    plant_species,
-    h2ofrequency,
-    plant_image
+    "plant_id": 11,
+    "species": "species of NewPlant",
+    "nickname": "My New Plant",
+    "h2oFrequency": 3,
+    "last_watered": "2021-08-19T06:00:00.000Z",
+    "photo_url": "https://www.houseplantsexpert.com/image-files/tillandsia-caputmedusae.jpg",
+    "notes": "Happy about my new plant",
+    "user_id": 3
 }
 
-[PUT] plant restricted (/api/plants/:plantId)
+<!-- [PUT] plant restricted (/api/plants/:plantId)
 
 *receives*
 
@@ -280,8 +245,7 @@ GET] plants by user_id *restricted* (/users/:id/plants)
         created_at,               
         updated_at
     
-} -->
--->-->   
+} -->  
 Login_credential: these credentials can be used to test the login and end points, if you did not register yet                                                      
 username: 
 		doej
