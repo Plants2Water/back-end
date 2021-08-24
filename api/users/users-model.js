@@ -1,6 +1,11 @@
 const db = require('../data/db-config');
 const { findById } = require('../auth/auth-model');
 
+
+function getAllUsers() {
+    return db("users");
+}
+
 const updateUserById  = async (id, user) => {
     await db('users')
     .where('user_id', id)
@@ -14,6 +19,7 @@ const getAllPlantsForUser  = async (id) => {
 };
 
 module.exports = {
+    getAllUsers,
     getAllPlantsForUser,
     updateUserById,
 };

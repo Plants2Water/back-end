@@ -2,9 +2,16 @@ const router = require('express').Router();
 const { 
     updateUserById,
     getAllPlantsForUser,
+    getAllUsers,
 } = require('./users-model');
 const { checkIdExists } = require('./users-middleware');
-const { checkUsernameExists } = require('../auth/auth_middleware');
+// const { checkUsernameExists } = require('../auth/auth_middleware'); //think about this in "put" - don't want to take existing username
+
+router.get(
+    '/',
+     async (req, res) => {
+    res.json(await getAllUsers());
+});
 
 router.get(
     '/:id', 
