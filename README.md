@@ -11,7 +11,7 @@ https://bw-water-my-plants-01.herokuapp.com/
 
 | Auth | Endpoint           | Required                  | Restrictions | Notes                                             |
 | -----| ------------------ | --------------------------| -------------| ------------------------------------------------- |
-| POST | /api/auth/register | username, last_name, first_name, password, telephone, email | Username: unique,min 3 & max 25 chars, password:min 8 & max 25 chars & phone: unique string| Creates a new user with auto Id.|
+| POST | /api/auth/register | username, last_name, first_name, password, telephone, email | | Creates a new user with auto Id.|
 | POST | /api/auth/login    | username, password        | None         | Returns a welcome message and the JSON Web Token. |
 
 
@@ -19,19 +19,18 @@ https://bw-water-my-plants-01.herokuapp.com/
 
 | Auth | Endpoint              | Required            | Restrictions      -| Notes                                    |
 | -----| --------------------- | --------------------| -------------------|------------------------------------------|
-| GET  | /api/users/:user_id        | None           | authenticated user | Returns the specified user object.       |
-| GET  | /api/users/:user_id/plants | None           | authenticated user | Returns array of users plants.           |
-| PUT  | /api/users/:user_id        | username, last_name, first_name, telephone, email |authenticated user| Returns updated user object.  |
+| GET  | /users/:user_id        | user_id           | authenticated user | Returns the specified user object.       |
+| GET  | /users/:user_id/plants | user_id           | authenticated user | Returns array of user plants.           |
+| PUT  | /users/:user_id        | username, last_name, first_name, telephone, email |authenticated user| Returns updated user object.  |
 
 
 ### Plants
 
 | Auth   | Endpoint        | Required            | Restrictions          | Notes                                       |
 | -------| --------------- | --------------------| ----------------------| ------------------------------------------- |
-| GET    | /api/plants/    | None                | authenticated user    |  Returns specified plant object.            |
-| GET    | /api/plants/:plant_id | None          | authenticated user    |  Returns array of All plants.               |
-| POST   | /api/plants/    | plant_nickname, plant_species, h2ofrequency, user_id | authenticated user        | Returns new plant object. |
-| PUT    | /api/plants/:plant_id | user_id, plant_nickname, plant_species, h2ofrequency | authenticated user        | Returns updated plant object.  |
+| GET    | /plants/:plant_id | None          | authenticated user    |  Returns specified plant object.               |
+| POST   | /api/plants/    | plant_nickname, user_id | authenticated user        | Returns new plant object. |
+| PUT    | /api/plants/ | plant_id, user_id, nickname | authenticated user        | Returns updated plant object.  |
 | DELETE | /api/plants/:plant_id | plant_id      | authenticated user | Returns deleted record if successfully deleted. |
 
 -->

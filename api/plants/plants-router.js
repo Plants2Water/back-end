@@ -4,6 +4,16 @@ const { checkUserIdExists } = require('../users/users-middleware');
 // const { getAllUsers } = require('../auth/auth-model');
 const { createPlant, updatePlantById, deleteByPlantId } = require('./plants-model');
 
+router.get(
+    '/:plant_id', 
+    checkPlantIdExists, 
+    (req, res, next) => {
+    try {
+        res.status(200).json(req.plant);
+    } catch (error) {
+        next(error);
+    }
+});
 
 router.post('/', validatePlantBody, checkUserIdExists, async (req, res, next) => {
     try {
