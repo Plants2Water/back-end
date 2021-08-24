@@ -21,7 +21,7 @@ server.use('/plants', restrict, plantsRouter); // only logged-in users
 server.use((err, req, res, next) => { // eslint-disable-line
   res.status(err.status || 500).json({
     message: err.message,
-    stack: err.stack,
+    stack: err.stack, // comment out this line before production
   });
 });
 

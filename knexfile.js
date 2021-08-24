@@ -15,10 +15,10 @@ require('dotenv').config()
     - testing_database_name (use the real name of the testing database you created in pgAdmin 4)
 
 */
-const pg = require('pg')
+const pg = require('pg');
 
 if (process.env.DATABASE_URL) {
-  pg.defaults.ssl = { rejectUnauthorized: false }
+  pg.defaults.ssl = { rejectUnauthorized: false };
 }
 
 const sharedConfig = {
@@ -41,4 +41,4 @@ module.exports = {
     connection: process.env.DATABASE_URL,
     pool: { min: 2, max: 10 },
   },
-}
+};
