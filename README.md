@@ -29,8 +29,8 @@ https://bw-water-my-plants-01.herokuapp.com/
 | Auth   | Endpoint        | Required            | Restrictions          | Notes                                       |
 | -------| --------------- | --------------------| ----------------------| ------------------------------------------- |
 | GET    | /plants/:plant_id | None          | authenticated user    |  Returns specified plant object.               |
-| POST   | /plants/    | plant_nickname, user_id | authenticated user        | Returns new plant object. |
-| PUT    | /plants/ | plant_id, user_id, nickname | authenticated user        | Returns updated plant object.  |
+| POST   | /plants/    | plant_id, nickname, user_id | authenticated user        | Returns new plant object. |
+| PUT    | /plants/ | plant_id, nickname, user_id | authenticated user        | Returns updated plant object.  |
 | DELETE | /plants/ | plant_id      | authenticated user | Returns deleted record if successfully deleted. |
 
 -->
