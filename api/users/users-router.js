@@ -29,7 +29,7 @@ router.put(
     checkUserIdExists,
     async (req, res, next) => {
         try {
-            const updated = await updateUserById(req.params.id, req.body);
+            const updated = await updateUserById(req.params.user_id, req.body);
             res.status(200).json(updated);
             } catch (error) {
             next(error);
@@ -41,7 +41,7 @@ router.get(
     checkUserIdExists,
     async (req, res, next) => {
         try {
-            const allPlants =  await getAllPlantsForUser(req.params.id);
+            const allPlants =  await getAllPlantsForUser(req.params.user_id);
             res.status(200).json(allPlants);
             } catch (error) {
             next(error);
