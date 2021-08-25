@@ -32,7 +32,6 @@ router.get(
 router.put(
     '/:user_id', 
     checkUserIdExists, 
-    validateUserBody,
     validateUsername,
     validateTelephone,
     validateEmail,
