@@ -2,11 +2,11 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const { add } = require('./auth-model');
 const { 
-    checkUsernameExists, 
-    validateUserBody, 
-    validateUsername,
-    validateTelephone,
-    validateEmail
+  newUsernameUnused,
+  checkUsernameExists, 
+  validateUserBody, 
+  newEmailUnused,
+  newTelephoneUnused,
 } = require('../auth/auth_middleware');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require("../secrets/index.js");
@@ -27,9 +27,9 @@ router
 .post(
   '/register',
   validateUserBody, 
-  validateUsername,
-  validateEmail,
-  validateTelephone,
+  newUsernameUnused,
+  newEmailUnused,
+  newTelephoneUnused,
   async (req, res, next) => {
   const body = trimProperties(req.body);
       try {

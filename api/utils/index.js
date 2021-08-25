@@ -1,7 +1,6 @@
 function trimProperties(obj) {
     const result = {};
     for (let prop in obj) {
-        console.log('typeof obj[prop] :>> ', typeof obj[prop]);
         if (typeof obj[prop] === 'string') {
             result[prop] = obj[prop].trim();
         } else {

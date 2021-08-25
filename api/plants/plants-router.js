@@ -17,7 +17,12 @@ router.get(
     }
 });
 
-router.post('/', validatePlantBody, checkUserIdExists, async (req, res, next) => {
+router.post(
+    '/', 
+    checkPlantIdExists,
+    validatePlantBody, 
+    checkUserIdExists, 
+    async (req, res, next) => {
     const body = trimProperties(req.body);
     try {
         const newPlant = await createPlant(body);

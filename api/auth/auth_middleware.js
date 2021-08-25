@@ -1,8 +1,65 @@
 const { findBy } = require('../auth/auth-model');
+const { trimProperties } = require('../utils/index');
 
-async function checkUsernameExists(req, res, next) {
+// checks to see that a username for a new register is not in use
+async function newUsernameUnused(req, res, next) { 
+  const body = trimProperties(req.body);
   try {
-    const { username } = req.body;
+    const { username } = body;
+    const user = await findBy({ username: username }); 
+    if (user.length) {
+      next({ 
+        status: 401, 
+        message: `Username ${username} already in use.` 
+      });    
+    } else {
+      next();
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+// checks to see that a telephone number for a new register is not in use
+async function newTelephoneUnused(req, res, next) { 
+  const body = trimProperties(req.body);
+  try {
+    const { telephone } = body;
+    const user = await findBy({ telephone: telephone }); 
+    if (user.length) {
+      next({ 
+        status: 401, 
+        message: `Telephone number ${telephone} already in use.` 
+      });    
+    } else {
+      next();
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+// checks to see that a telephone number for a new register is not in use
+async function newEmailUnused(req, res, next) { 
+  const body = trimProperties(req.body);
+  try {
+    const { email } = body;
+    const user = await findBy({ email: email }); 
+    if (user.length) {
+      next({ 
+        status: 401, 
+        message: `Email address ${email} already in use.` 
+      });    
+    } else {
+      next();
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+// confirms that the username exists on a login
+async function checkUsernameExists(req, res, next) { 
+  const body = trimProperties(req.body);
+  try {
+    const { username } = body;
     const user = await findBy({ username: username }); 
     if (user.length) {
       req.user = user[0];
@@ -17,46 +74,64 @@ async function checkUsernameExists(req, res, next) {
     next(err);
   }
 }
-
+// rejects if telephone in req.body belongs to a user with different user_id. user_id must be in req.body
 async function validateTelephone(req, res, next) {
+  const body = trimProperties(req.body);
   try {
-    const { telephone } = req.body;
-    const user = await findBy({ telephone: telephone }); 
-    if (!user.length) {
-      next();
+    if (body.telephone && (body.user_id || req.params.user_id)) {
+        const { telephone } = body;
+        const user = await findBy({ telephone: telephone }); 
+        if (!user.length) {
+          next();
+        } else if ((body.user_id == user[0].user_id) || (req.params.user_id == user[0].user_id)) {
+          next();
+        } else {
+          next({ 
+            status: 401, 
+            message: `Telephone number ${telephone} is already in use.`
+          });
+        }  
     } else {
-      next({ 
-        status: 401, 
-        message: `Telephone number ${telephone} is already in use.`
-      });
+      next();
     }
   } catch (err) {
-    next(err);
-  }
+      next(err);
+  } 
 }
-
+// rejects if email in req.body belongs to a user with different user_id. user_id must be in req.body
 async function validateEmail(req, res, next) {
+  const body = trimProperties(req.body);
   try {
-    const { email } = req.body;
-    const user = await findBy({ email: email }); 
+    if (body.email && (body.user_id || req.params.user_id)) {
+      const { email } = body;
+      const user = await findBy({ email: email }); 
+      if (!user.length) {
+        next();
+      } else if ((body.user_id == user[0].user_id) || (req.params.user_id == user[0].user_id)) {
+        next();
+      } else {
+        next({ 
+          status: 401, 
+          message: `Email address ${email} is already in use.`
+        });
+      }
+      } else {
+        next();
+      }
+  } catch (err) {
+      next(err);
+  } 
+}
+// rejects if username in req.body belongs to a user with different user_id. user_id must be in req.body
+async function validateUsername(req, res, next) { 
+  const body = trimProperties(req.body);
+  try {
+    if (body.username && (body.user_id || req.params.user_id)) {
+      const { username } = body;
+      const user = await findBy({ username: username }); 
     if (!user.length) {
       next();
-    } else {
-      next({ 
-        status: 401, 
-        message: `Email address ${email} is already in use.`
-      });
-    }
-  } catch (err) {
-    next(err);
-  }
-}
-
-async function validateUsername(req, res, next) {
-  try {
-    const { username } = req.body;
-    const user = await findBy({ username: username }); 
-    if (!user.length) {
+    } else if ((body.user_id == user[0].user_id) || (req.params.user_id == user[0].user_id)) {
       next();
     } else {
       next({ 
@@ -64,12 +139,16 @@ async function validateUsername(req, res, next) {
         message: `Username ${username} is already in use.`
       });
     }
-  } catch (err) {
-    next(err);
+  } else {
+    next();
   }
+} catch (err) {
+  next(err);
+  } 
 }
   
 const validateUserBody = (req, res, next) => {
+  const body = trimProperties(req.body);
   try {
     const { 
         username, 
@@ -78,7 +157,7 @@ const validateUserBody = (req, res, next) => {
         first_name,
         telephone,
         email
-      } = req.body;
+      } = body;
     if (
         !username || 
         !password ||
@@ -100,9 +179,12 @@ const validateUserBody = (req, res, next) => {
 };
 
 module.exports = { 
-    validateUsername,
-    checkUsernameExists,
-    validateUserBody,
-    validateTelephone,
-    validateEmail
+  newUsernameUnused,
+  newEmailUnused,
+  newTelephoneUnused,
+  validateUsername,
+  checkUsernameExists,
+  validateUserBody,
+  validateTelephone,
+  validateEmail
 };
