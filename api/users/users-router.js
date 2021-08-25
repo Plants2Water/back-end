@@ -5,7 +5,7 @@ const {
     getAllUsers,
 } = require('./users-model');
 const { checkUserIdExists } = require('./users-middleware');
-// const { trimProperties } = require('../utils/index');
+const { trimProperties } = require('../utils/index');
 // const {
 //     validateUserBody, 
 //     validateTelephone,
@@ -34,9 +34,9 @@ router.put(
     '/:user_id', 
       checkUserIdExists, 
     async (req, res, next) => {
-        // const body = trimProperties(req.body);
+        const body = trimProperties(req.body);
         try {
-            const updated = await updateUserById(req.params.user_id, req.body);
+            const updated = await updateUserById(req.params.user_id, body);
             res.status(200).json(updated);
             } catch (error) {
             next(error);

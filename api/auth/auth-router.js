@@ -10,7 +10,7 @@ const {
 } = require('../auth/auth_middleware');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require("../secrets/index.js");
-// const { trimProperties } = require('../utils/index');
+const { trimProperties } = require('../utils/index');
 
 function buildToken(user) {
   const payload = {
@@ -31,7 +31,7 @@ router
   validateEmail,
   validateTelephone,
   async (req, res, next) => {
-  // const body = trimProperties(req.body);
+  const body = trimProperties(req.body);
       try {
         const {
             username, 
@@ -40,7 +40,7 @@ router
             first_name,
             telephone,
             email
-         } = req.body;
+         } = body;
         const hash = bcrypt.hashSync(password, 8);
         const user = { 
             username, 
@@ -61,10 +61,10 @@ router.post(
   '/login', 
   checkUsernameExists,
   (req, res, next) => {
-    // const body = trimProperties(req.body);
+    const body = trimProperties(req.body);
     try {
         const { password } = req.user;
-        if (bcrypt.compareSync(req.body.password, password)) {
+        if (bcrypt.compareSync(body.password, password)) {
          const token = buildToken(req.user);
   
           // req.session.user = req.user;
