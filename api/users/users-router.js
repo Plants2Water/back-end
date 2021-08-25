@@ -5,13 +5,13 @@ const {
     getAllUsers,
 } = require('./users-model');
 const { checkUserIdExists } = require('./users-middleware');
-const { trimProperties } = require('../utils/index');
-const {
-    validateUserBody, 
-    validateTelephone,
-    validateEmail,
-    validateUsername,
-} = require('../auth/auth_middleware'); //think about this in "put" - don't want to accept existing username, telephone or email
+// const { trimProperties } = require('../utils/index');
+// const {
+//     validateUserBody, 
+//     validateTelephone,
+//     validateEmail,
+//     validateUsername,
+// } = require('../auth/auth_middleware'); //think about this in "put" - don't want to accept existing username, telephone or email
 
 router.get(
     '/',
@@ -34,9 +34,9 @@ router.put(
     '/:user_id', 
       checkUserIdExists, 
     async (req, res, next) => {
-        const body = trimProperties(req.body);
+        // const body = trimProperties(req.body);
         try {
-            const updated = await updateUserById(req.params.user_id, body);
+            const updated = await updateUserById(req.params.user_id, req.body);
             res.status(200).json(updated);
             } catch (error) {
             next(error);
