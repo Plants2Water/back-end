@@ -34,6 +34,8 @@ https://bw-water-my-plants-01.herokuapp.com/
 | DELETE | /plants/ | plant_id      | authenticated user | Returns deleted record if successfully deleted. |
 
 -->
+DETAILED ENDPOINTS ARE MUCH MORE LEGIBLE IN VSCODE
+
 ### Detailed_endpoints
 
 [POST] REGISTER (/api/auth/register). 
@@ -66,8 +68,9 @@ https://bw-water-my-plants-01.herokuapp.com/
 ---------------------
     
     {
-    	username,
-    	password,
+        "username": "plantlover",
+        "password": "1234",
+
     {
 
 
@@ -79,7 +82,7 @@ https://bw-water-my-plants-01.herokuapp.com/
     }
 
 
-[GET] user by ID *restricted* (api/users/:userId)   
+[GET] user by ID *restricted* (/users/:user_id)   
 ---------------------
 *expects*
 /users/:user_id
@@ -97,9 +100,9 @@ https://bw-water-my-plants-01.herokuapp.com/
     "updated_at": "2021-08-23T14:42:11.045Z"
 }
 
-[PUT] user by ID *restricted* (api/users/:user_id)   
+[PUT] user by ID *restricted* (/users/:user_id)   
 ---------------------
-*expects body with any subset of the following properties*
+*expects body with all of of the following properties*
 
 {
     "last_name": "Jones",
@@ -107,6 +110,7 @@ https://bw-water-my-plants-01.herokuapp.com/
     "telephone": "(208)-555-6556",
     "email": "brownie@kill.com"
 }
+
 *returns* 
 {
     "user_id": 2,
@@ -120,18 +124,6 @@ https://bw-water-my-plants-01.herokuapp.com/
     "updated_at": "2021-08-23T14:42:11.045Z"
 }
 
-*returns*    
-{
-    "user_id": 2,
-    "username": "brownthumb",
-    "password": "$2a$08$tjE6ebEFy7n7zUjsjD2IO.jilGy.RsS8dQEdJgk70XeDrKpnSVVtK",
-    "last_name": "Jones",
-    "first_name": "Pesticide",
-    "telephone": "(208)-382-6786",
-    "email": "brownie@kill.com",
-    "created_at": "2021-08-23T14:42:11.045Z",
-    "updated_at": "2021-08-23T14:42:11.045Z"
-}
  
 [GET] plants by user_id *restricted* (/users/:user_id/plants)
 ---------------------
