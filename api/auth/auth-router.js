@@ -57,10 +57,7 @@ router
 
 router.post(
   '/login', 
-  checkUsernameExists, 
-  validateUserBody,
-  validateEmail,
-  validateTelephone,
+  checkUsernameExists,
   (req, res, next) => {
     try {
         const { password } = req.user;
@@ -74,7 +71,7 @@ router.post(
             token: token,
         });
         } else {
-          next({ status: 401, message: "invalid credentials" });
+          next({ status: 401, message: "Invalid credentials." });
         }
     } catch (err) {
         next(err);
