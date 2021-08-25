@@ -31,10 +31,7 @@ router.get(
 
 router.put(
     '/:user_id', 
-    checkUserIdExists, 
-    validateUsername,
-    validateTelephone,
-    validateEmail,
+      checkUserIdExists, 
     async (req, res, next) => {
         try {
             const updated = await updateUserById(req.params.user_id, req.body);
