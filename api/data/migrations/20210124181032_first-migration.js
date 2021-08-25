@@ -6,8 +6,8 @@ exports.up = async (knex) => {
       table.string('password', 200).notNullable();
       table.string('last_name', 200).notNullable();
       table.string('first_name', 200).notNullable();
-      table.string('telephone', 200).unique().notNullable();
-      table.string('email', 200).unique().notNullable();
+      table.string('telephone', 200).notNullable();
+      table.string('email', 200).notNullable();
  
       table.timestamps(false, true);
     })
