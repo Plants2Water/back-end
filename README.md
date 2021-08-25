@@ -144,29 +144,6 @@ DETAILED ENDPOINTS ARE MUCH MORE LEGIBLE IN VSCODE
         "updated_at": "2021-08-23T14:42:11.049Z"
     }
 ]
-
-[PUT] user *restricted* (/users/:user_id)
----------------------
-
-*receives*  
-
-{  
-
-    username,          
-    user_phone,                                                                    
-    user_email,                                    
-}
-
-*returns*    
-{  
-
-    user_id,
-    username,                                 
-    user_phone,                                 
-    user_email,                                      
-    created_at                                  
-}
-[
  
 [POST] plant *restricted* (/plants)
 
