@@ -19,7 +19,6 @@ router.get(
 
 router.post(
     '/', 
-    checkPlantIdExists,
     validatePlantBody, 
     checkUserIdExists, 
     async (req, res, next) => {
@@ -46,7 +45,7 @@ router.delete('/', checkPlantIdExists, async (req, res, next) => {
     const { plant_id } = req.body;
     try {
         await deleteByPlantId(plant_id);
-        return res.status(201).json(req.plant);
+        return res.status(200).json(req.plant);
     } catch (error) {
         next(error);
     }    
