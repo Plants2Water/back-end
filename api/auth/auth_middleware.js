@@ -138,7 +138,7 @@ async function validateUsername(req, res, next) {
         status: 401, 
         message: `Username ${username} is already in use`
       });
-    }
+    } 
   } else {
     next();
   }

@@ -31,7 +31,7 @@ router.post(
     }    
 });
 
-router.put('/', validatePlantBody, checkUserIdExists, checkPlantIdExists, async (req, res, next) => {
+router.put('/', checkUserIdExists, checkPlantIdExists, async (req, res, next) => {
     const body = trimProperties(req.body);
     try {
         const updatedPlant = await updatePlantById(body);
