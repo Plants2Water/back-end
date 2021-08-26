@@ -1,4 +1,5 @@
 const { findPlantBy } = require('./plants-model');
+const { validateDateFormat, trimProperties } = require('../utils/index');
 
 async function checkPlantIdExists(req, res, next) {
   let id = 0;
@@ -24,6 +25,7 @@ async function checkPlantIdExists(req, res, next) {
 }
 
 const validatePlantBody = (req, res, next) => {
+  req.body = trimProperties(req.body);
     try {
       const { nickname } = req.body;
       if (!nickname) {
@@ -38,7 +40,25 @@ const validatePlantBody = (req, res, next) => {
     }
   };
 
+  const validateLastWatered = (req, res, next) => {
+    req.body = trimProperties(req.body);
+    const { last_watered } = req.body;
+    try {
+      if (validateDateFormat(last_watered)) {
+        next(); 
+      } else {
+        next({
+          status: 401,
+          message: `Last watered date must be in MM/DD/YYYY format`
+        });
+      }
+    } catch (error){
+      next(error);
+    }
+  };
+
   module.exports = {
     checkPlantIdExists,
-    validatePlantBody
+    validatePlantBody,
+    validateLastWatered
  };

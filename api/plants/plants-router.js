@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { validatePlantBody, checkPlantIdExists } = require('./plants-middleware');
+const { validatePlantBody, checkPlantIdExists, validateLastWatered } = require('./plants-middleware');
 const { checkUserIdExists } = require('../users/users-middleware');
 // const { getAllUsers } = require('../auth/auth-model');
 const { createPlant, updatePlantById, deleteByPlantId } = require('./plants-model');
@@ -20,7 +20,8 @@ router.get(
 router.post(
     '/', 
     validatePlantBody, 
-    checkUserIdExists, 
+    checkUserIdExists,
+    validateLastWatered, 
     async (req, res, next) => {
     const body = trimProperties(req.body);
     try {
@@ -31,7 +32,12 @@ router.post(
     }    
 });
 
-router.put('/', checkUserIdExists, checkPlantIdExists, async (req, res, next) => {
+router.put(
+    '/', 
+    checkUserIdExists, 
+    checkPlantIdExists,
+    validateLastWatered,
+     async (req, res, next) => {
     const body = trimProperties(req.body);
     try {
         const updatedPlant = await updatePlantById(body);

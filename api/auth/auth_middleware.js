@@ -1,5 +1,8 @@
 const { findBy } = require('../auth/auth-model');
-const { trimProperties } = require('../utils/index');
+const { 
+  trimProperties,
+  validatePasswordFormat,
+} = require('../utils/index');
 
 // checks to see that a username for a new registration is not in use
 async function newUsernameUnused(req, res, next) { 
@@ -183,7 +186,8 @@ const validatePassword = (req, res, next) => {
   const body = trimProperties(req.body);
   const { password } = body;
   try {
-    if (/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/.test(password)) {
+    // if (/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/.test(password)) {
+    if (validatePasswordFormat(password)) {
       next(); 
     } else {
       next({

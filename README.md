@@ -29,8 +29,8 @@ https://bw-water-my-plants-01.herokuapp.com/
 | Auth   | Endpoint        | Required            | Restrictions          | Notes                                       |
 | -------| --------------- | --------------------| ----------------------| ------------------------------------------- |
 | GET    | /plants/:plant_id | None          | authenticated user    |  Returns specified plant object.               |
-| POST   | /plants/    | plant_id, nickname, user_id | authenticated user        | Returns new plant object. |
-| PUT    | /plants/ | plant_id, nickname, user_id | authenticated user        | Returns updated plant object.  |
+| POST   | /plants/    | plant_id, nickname, user_id | authenticated user,  last_watered: MM/DD/YYYY        | Returns new plant object. |
+| PUT    | /plants/ | plant_id, nickname, user_id | authenticated user, last_watered: MM/DD/YYYY        | Returns updated plant object.  |
 | DELETE | /plants/ | plant_id      | authenticated user | Returns deleted record if successfully deleted. |
 
 -->
@@ -61,6 +61,12 @@ DETAILED ENDPOINTS ARE MUCH MORE LEGIBLE IN VSCODE
     "last_name": "Doe",
     "telephone": "(208)-382-6393",
     "email": "jondoe@name.com"
+}
+
+*Password that fails validation returns* 
+
+{
+    "message": "Password must contain at least 8 characters; one uppercase, one number and one special case character"
 }
 
 
@@ -146,6 +152,7 @@ DETAILED ENDPOINTS ARE MUCH MORE LEGIBLE IN VSCODE
 ]
  
 [POST] plant *restricted* (/plants)
+last_watered must be in MM/DD/YYYY format (will also accept single digit month and day values - M/D/YYYY or M/DD/YYYY)
 
 *receives*
 
@@ -153,7 +160,7 @@ DETAILED ENDPOINTS ARE MUCH MORE LEGIBLE IN VSCODE
     "species": "species of NewPlant",
     "nickname": "My New Plant"
     "h2oFrequency": 3,
-    "last_watered": "2021-08-19",
+    "last_watered": "8/19/2021",
     "photo_url": "https://www.houseplantsexpert.com/image-files/tillandsia-caputmedusae.jpg",
     "notes": "Happy about my new plant",
     "user_id": 3
@@ -174,6 +181,7 @@ NOTE: only nickname and user_id are required.
 }
 
  [PUT] plant *restricted* (/plants)
+ last_watered must be in MM/DD/YYYY format (will also accept single digit month and day values - M/D/YYYY or M/DD/YYYY)
 
 *receives*
 
@@ -182,7 +190,7 @@ NOTE: only nickname and user_id are required.
     "species": "updated species of NewPlant",
     "nickname": "My New updated Plant",
     "h2oFrequency": 4,
-    "last_watered": "2021-08-25",
+    "last_watered": "8/25/2021",
     "photo_url": "https://www.houseplantsexpert.com/image-files/tillandsia-caputmedusae.jpg",
     "notes": "Happy about my new updated plant",
     "user_id": 3
