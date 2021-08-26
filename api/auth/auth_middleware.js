@@ -1,7 +1,7 @@
 const { findBy } = require('../auth/auth-model');
 const { trimProperties } = require('../utils/index');
 
-// checks to see that a username for a new register is not in use
+// checks to see that a username for a new registration is not in use
 async function newUsernameUnused(req, res, next) { 
   const body = trimProperties(req.body);
   try {
@@ -10,7 +10,7 @@ async function newUsernameUnused(req, res, next) {
     if (user.length) {
       next({ 
         status: 401, 
-        message: `Username ${username} already in use.` 
+        message: `Username ${username} already in use` 
       });    
     } else {
       next();
@@ -19,7 +19,7 @@ async function newUsernameUnused(req, res, next) {
     next(err);
   }
 }
-// checks to see that a telephone number for a new register is not in use
+// checks to see that a telephone number for a new registration is not in use
 async function newTelephoneUnused(req, res, next) { 
   const body = trimProperties(req.body);
   try {
@@ -28,7 +28,7 @@ async function newTelephoneUnused(req, res, next) {
     if (user.length) {
       next({ 
         status: 401, 
-        message: `Telephone number ${telephone} already in use.` 
+        message: `Telephone number ${telephone} already in use` 
       });    
     } else {
       next();
@@ -37,7 +37,7 @@ async function newTelephoneUnused(req, res, next) {
     next(err);
   }
 }
-// checks to see that a telephone number for a new register is not in use
+// checks to see that a email address for a new registration is not in use
 async function newEmailUnused(req, res, next) { 
   const body = trimProperties(req.body);
   try {
@@ -46,7 +46,7 @@ async function newEmailUnused(req, res, next) {
     if (user.length) {
       next({ 
         status: 401, 
-        message: `Email address ${email} already in use.` 
+        message: `Email address ${email} already in use` 
       });    
     } else {
       next();
@@ -67,7 +67,7 @@ async function checkUsernameExists(req, res, next) {
     } else {
       next({ 
         status: 401, 
-        message: "invalid credentials" 
+        message: "Invalid credentials" 
       });
     }
   } catch (err) {
@@ -88,7 +88,7 @@ async function validateTelephone(req, res, next) {
         } else {
           next({ 
             status: 401, 
-            message: `Telephone number ${telephone} is already in use.`
+            message: `Telephone number ${telephone} is already in use`
           });
         }  
     } else {
@@ -112,7 +112,7 @@ async function validateEmail(req, res, next) {
       } else {
         next({ 
           status: 401, 
-          message: `Email address ${email} is already in use.`
+          message: `Email address ${email} is already in use`
         });
       }
       } else {
@@ -136,7 +136,7 @@ async function validateUsername(req, res, next) {
     } else {
       next({ 
         status: 401, 
-        message: `Username ${username} is already in use.`
+        message: `Username ${username} is already in use`
       });
     }
   } else {
@@ -168,13 +168,31 @@ const validateUserBody = (req, res, next) => {
         ) {
       next({
         status: 401,
-        message: "username, password, last name, first name, telephone and email address are all required"
+        message: "Username, password, last name, first name, telephone and email address are all required"
       });
     } else {
       next();
     }
   } catch (error) {
-      next(error);
+    next(error);
+  }
+};
+
+// Password must contain at least 8 characters, one uppercase, one number and one special case character
+const validatePassword = (req, res, next) => {
+  const body = trimProperties(req.body);
+  const { password } = body;
+  try {
+    if (/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/.test(password)) {
+      next(); 
+    } else {
+      next({
+        status: 401,
+        message: `Password must contain at least 8 characters; one uppercase, one number and one special case character`
+      });
+    }
+  } catch (error){
+    next(error);
   }
 };
 
@@ -186,5 +204,6 @@ module.exports = {
   checkUsernameExists,
   validateUserBody,
   validateTelephone,
-  validateEmail
+  validateEmail,
+  validatePassword
 };

@@ -7,6 +7,7 @@ const {
   validateUserBody, 
   newEmailUnused,
   newTelephoneUnused,
+  validatePassword
 } = require('../auth/auth_middleware');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require("../secrets/index.js");
@@ -30,6 +31,7 @@ router
   newUsernameUnused,
   newEmailUnused,
   newTelephoneUnused,
+  validatePassword,
   async (req, res, next) => {
   const body = trimProperties(req.body);
       try {

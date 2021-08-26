@@ -21,7 +21,7 @@ https://bw-water-my-plants-01.herokuapp.com/
 | -----| --------------------- | --------------------| -------------------|------------------------------------------|
 | GET  | /users/:user_id        | user_id           | authenticated user | Returns the specified user object.       |
 | GET  | /users/:user_id/plants | user_id           | authenticated user | Returns array of user plants.           |
-| PUT  | /users/:user_id        | user_id, username, last_name, first_name, telephone, email |authenticated user| Returns updated user object.  |
+| PUT  | /users/:user_id        | user_id, username, last_name, first_name, telephone, email |authenticated user| Returns updated user object. Password must contain at least 8 characters; one uppercase, one number and one special case character (!@#$%^&*()\-_=+{};:,<.>) |
 
 
 ### Plants
