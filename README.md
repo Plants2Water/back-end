@@ -11,7 +11,7 @@ https://bw-water-my-plants-01.herokuapp.com/
 
 | Auth | Endpoint           | Required                  | Restrictions | Notes                                             |
 | -----| ------------------ | --------------------------| -------------| ------------------------------------------------- |
-| POST | /api/auth/register | username, last_name, first_name, password, telephone, email | | Creates a new user with auto Id.|
+| POST | /api/auth/register | username, last_name, first_name, password, telephone, email. Password must contain at least 8 characters; one uppercase, one number and one special case character (!@#$%^&*()\-_=+{};:,<.>) | | Creates a new user with auto Id.|
 | POST | /api/auth/login    | username, password        | None         | Returns a welcome message and the JSON Web Token. |
 
 
@@ -21,7 +21,7 @@ https://bw-water-my-plants-01.herokuapp.com/
 | -----| --------------------- | --------------------| -------------------|------------------------------------------|
 | GET  | /users/:user_id        | user_id           | authenticated user | Returns the specified user object.       |
 | GET  | /users/:user_id/plants | user_id           | authenticated user | Returns array of user plants.           |
-| PUT  | /users/:user_id        | user_id, username, last_name, first_name, telephone, email |authenticated user| Returns updated user object. Password must contain at least 8 characters; one uppercase, one number and one special case character (!@#$%^&*()\-_=+{};:,<.>) |
+| PUT  | /users/:user_id        | user_id, username, last_name, first_name, telephone, email |authenticated user| Returns updated user object. |
 
 
 ### Plants
